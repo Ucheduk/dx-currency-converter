@@ -1,0 +1,128 @@
+button 				{
+  font-size:18px;
+  width: 100%;
+  flex: 0.5;
+  padding:10px 10px 10px 5px;
+  ddisplay:block;
+  dposition: relative;
+  border:none;
+  background-color: $mainBlue;
+  color: #fff;
+  float: left;
+}
+@mixin atMedium {
+  button 				{
+    font-size:18px;
+    width: 100%;
+    flex: 0.3;
+    padding:10px 10px 10px 5px;
+    ddisplay:block;
+    dposition: relative;
+    border:none;
+    background-color: $mainBlue;
+    color: #fff;
+    float: left;
+  }
+}
+.fa-arrows-alt-h{
+  color: $mainBlue;
+  flex: 0;
+}
+select 				{
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  width:50%;
+  flex: 1;
+  display: flex;
+  margin: 0 20px;
+  border:none;
+  border-bottom:4px solid $mainBlue;
+  dfloat: left;
+}
+.flexContainer{
+    
+    display: flex;
+    margin: 0 auto 0 auto;
+    width: 100%;
+
+    &--medium {
+        width: 40%;
+    }
+}
+.flexContainer2{
+    display: flex;
+    margin: 30px auto 0 auto;
+    width: 100%;
+    justify-content: center;
+
+    &--medium {
+        width: 70%;
+    }
+}
+input 				{
+  font-size:18px;
+  width: 50%;
+  flex: 0.5;
+  padding:10px 10px 10px 5px; 
+  height: 40px;
+  border:none;
+  margin: 0 auto 0 auto;
+  border-bottom:1px solid $mainBlue;
+  dposition: absolute;
+  dfloat: left;
+}
+
+  @mixin atMedium {
+    input 		{
+      font-size:18px;
+      width: 50%;
+      flex: 1;
+      padding:10px 10px 10px 5px; 
+      height: 40px;
+      border:none;
+      margin: 0 auto 0 auto;
+      border-bottom:1px solid $mainBlue;
+      dposition: absolute;
+      dfloat: left;
+
+    }
+}
+input:focus 		{ outline:none; }
+
+/* LABEL ======================================= */
+label 				 {
+  color:#999; 
+  font-size:18px;
+  font-weight:normal;
+  display: absolute;
+  margin: 0 auto;
+}
+
+/* BOTTOM BARS ================================= */
+/* .bar 	{ position:relative; display:block; width:30%; }
+.bar:before, .bar:after 	{
+  content:'';
+  height:2px; 
+  width:0;
+  bottom:1px; 
+  position:absolute;
+  background:#5264AE; 
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+} */
+
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
