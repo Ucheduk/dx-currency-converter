@@ -70,12 +70,6 @@
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _IndexController = __webpack_require__(1);
 
 var _IndexController2 = _interopRequireDefault(_IndexController);
@@ -90,12 +84,24 @@ var _UI2 = _interopRequireDefault(_UI);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var currency = new _Currency2.default(); /**
+                                          * Currency Converter App
+                                          * ALC 3.0 7days Challenge
+                                          * Google Africa Challenge Scholarship
+                                          * Udacity
+                                          *
+                                          * @version 1.0.0
+                                          * @author  Nwakwuo Uche Kingsley
+                                          * @license ALC 
+                                          *
+                                          **/
 
-var currency = new _Currency2.default();
+var ui = new _UI2.default();
 
+// Check if ServiceWorker enabled 
 if ('serviceWorker' in navigator) {
 
+  // Register ServiceWorker
   navigator.serviceWorker.register('./Sw.js').then(function (reg) {
     console.log('[ServiceWorker Registered]', reg);
   }).catch(function (err) {
@@ -103,62 +109,27 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-var App = function () {
-  function App() {
-    _classCallCheck(this, App);
+// Event on convert btn click
+document.addEventListener('click', convertCurrency);
+function convertCurrency(e) {
+  if (e.target.classList.contains('convertBtn')) {
+    console.log(e.target);
 
-    this.ui = new _UI2.default();
-    // this.registerServiceWorker();
-    this.event();
+    var from = document.getElementById('fromVal').value;
+    var to = document.getElementById("toVal").value;
+    var amount = parseFloat(document.getElementById("amount").value);
+    var indexCtrl = new _IndexController2.default(from, to, amount);
+
+    // Display the calculated data
+    indexCtrl.get().then(function (data) {
+      ui.getCurrencyVal(data);
+      console.log(data, e);
+    }).catch(function (err) {
+      return console.log(err);
+    });
   }
-
-  // registerServiceWorker() {
-
-  //   if ('serviceWorker' in navigator) {
-
-  //     navigator.serviceWorker
-  //       .register('./Sw.js')
-  //       .then((reg) => {
-  //         console.log('[ServiceWorker Registered]', reg);
-  //       })
-  //       .catch((err) => console.log('[ServiceWorker Registered Failed]', err));
-
-  //   }
-  // }
-
-  _createClass(App, [{
-    key: 'event',
-    value: function event() {
-      // Event on convert btn click
-      document.addEventListener('click', this.convertCurrency(e));
-    }
-  }, {
-    key: 'convertCurrency',
-    value: function convertCurrency(e) {
-      var _this = this;
-
-      if (e.target.classList.contains('convertBtn')) {
-        var from = document.getElementById('fromVal').value;
-        var to = document.getElementById("toVal").value;
-        var amount = parseFloat(document.getElementById("amount").value);
-        var indexCtrl2 = new _IndexController2.default(from, to, amount);
-
-        // Display the calculated data
-        indexCtrl2.get().then(function (data) {
-          _this.ui.getCurrencyVal(data);
-        }).catch(function (err) {
-          return console.log(err);
-        });
-      }
-
-      e.preventDefault();
-    }
-  }]);
-
-  return App;
-}();
-
-exports.default = App;
+  e.preventDefault();
+}
 
 /***/ }),
 /* 1 */
@@ -184,6 +155,9 @@ var IndexController = function () {
         this.to = to;
         this.amount = amount;
     }
+
+    // Gets the qurey data from the API
+
 
     _createClass(IndexController, [{
         key: 'get',
@@ -255,10 +229,13 @@ var Currency = function () {
                 var store = upgradeDb.createObjectStore('dx', {
                     keyPath: 'id'
                 });
-                console.log("Store Created", store);
-                // store.createIndex('by-date', 'time');
+                console.log("Store Created");
             });
         }
+
+        // Gets all currencies from the currencies API
+        // and display in select input
+
     }, {
         key: 'getCurrencies',
         value: function getCurrencies() {
@@ -270,36 +247,26 @@ var Currency = function () {
                 }).then(function (data) {
                     resolve(data);
 
-                    var msgs = data.results;
+                    var currencies = data.results;
 
                     _this.dbPromise().then(function (db) {
                         if (!db) return;
 
                         var tx = db.transaction('dx', 'readwrite');
                         var store = tx.objectStore('dx');
-                        for (var key in msgs) {
-                            if (msgs.hasOwnProperty(key)) {
-                                var msg = msgs[key];
-                                store.put(msg);
-                                console.log('Currencies added', msg);
-                                _this.fromVal.innerHTML += '<option value="' + msg.id + '">' + msg.id + ' (' + msg.currencyName + ')</option>';
-                                _this.toVal.innerHTML += '<option value="' + msg.id + '">' + msg.id + ' (' + msg.currencyName + ')</option>';
+                        for (var key in currencies) {
+                            if (currencies.hasOwnProperty(key)) {
+                                var _currency = currencies[key];
+
+                                // Adds currency data to IndexedDB
+                                store.put(_currency);
+                                _this.fromVal.innerHTML += '<option value="' + _currency.id + '">' + _currency.id + ' (' + _currency.currencyName + ')</option>';
+                                _this.toVal.innerHTML += '<option value="' + _currency.id + '">' + _currency.id + ' (' + _currency.currencyName + ')</option>';
                             }
                         }
                         document.getElementById("fromVal").selectedIndex = "8";
                         document.getElementById("toVal").selectedIndex = "72";
                     });
-
-                    // let currencies = msgs;
-                    // console.log(currencies);
-                    // for (const key in currencies) {
-                    // if (currencies.hasOwnProperty(key)) {
-                    //     const element = currencies[key];
-                    //     this.fromVal.innerHTML += `<option value="${element.id}">${element.id} (${element.currencyName})</option>`;
-                    //     this.toVal.innerHTML += `<option value="${element.id}">${element.id} (${element.currencyName})</option>`;
-                    //     console.log('option value', element); 
-                    // }
-                    // }
                 }).catch(function (err) {
                     return reject(err);
                 });
@@ -659,6 +626,9 @@ var UI = function () {
     this.to = document.getElementById("toVal").value;
   }
 
+  // Gets qurey data from IndexController
+
+
   _createClass(UI, [{
     key: 'getCurrencyVal',
     value: function getCurrencyVal(data) {
@@ -670,9 +640,10 @@ var UI = function () {
 
       var obj = data.results;
       var result = Object.values(obj);
+
+      // Calculates the result of the amount to convert
       var amt = amount * result[0].val;
       amt = amt.toFixed(2);
-      console.log(result, amt, amount, amtVal);
       if (amt !== '') {
 
         // Changing the DOM to show calculated result
