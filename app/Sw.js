@@ -1,5 +1,4 @@
 const staticCacheName = 'dx-static-v2';
-// const contentImgsCache = 'wittr-content-imgs';
 let allCaches = [
   staticCacheName,
 ];
@@ -42,34 +41,6 @@ self.addEventListener('activate', (event) => {
 
   );
 });
-
-// self.addEventListener('fetch', (event) => {
-//   console.log('[ServiceWorker] Fetching', event.request.url)
-//   let requestUrl = new URL(event.request.url);
-
-//   if (requestUrl.origin === location.origin) {
-//     if (requestUrl.pathname === '/') {
-//       event.respondWith(caches.match('/'));
-//       console.log('[ServiceWorker] Found path / in cache ')
-//       return;
-//     }
-//     if (requestUrl === 'https://use.fontawesome.com/releases/v5.1.0/css/all.css') {
-//       event.respondWith(caches.match('css'));
-//       console.log('[ServiceWorker] Found path fontawesome css in cache ')
-//       return;
-//     }
-//     // if (requestUrl.pathname.startsWith('/photos/')) {
-//     //   event.respondWith(servePhoto(event.request));
-//     //   return;
-//     // }
-//   }
-
-//   event.respondWith(
-//     caches.match(event.request).then((response) => {
-//       return response || fetch(event.request);
-//     })
-//   );
-// });
 
 self.addEventListener('fetch', function(event) {
   console.log('Fetch event for ', event.request.url);

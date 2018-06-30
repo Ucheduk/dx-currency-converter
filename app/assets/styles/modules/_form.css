@@ -1,10 +1,8 @@
 button 				{
   font-size:18px;
   width: 100%;
-  flex: 0.5;
+  flex: 0.3;
   padding:10px 10px 10px 5px;
-  ddisplay:block;
-  dposition: relative;
   border:none;
   background-color: $mainBlue;
   color: #fff;
@@ -16,8 +14,6 @@ button 				{
     width: 100%;
     flex: 0.3;
     padding:10px 10px 10px 5px;
-    ddisplay:block;
-    dposition: relative;
     border:none;
     background-color: $mainBlue;
     color: #fff;
@@ -37,7 +33,6 @@ select 				{
   margin: 0 20px;
   border:none;
   border-bottom:4px solid $mainBlue;
-  dfloat: left;
 }
 .flexContainer{
     
@@ -62,7 +57,7 @@ select 				{
 input 				{
   font-size:18px;
   width: 50%;
-  flex: 0.5;
+  flex: 0.7;
   padding:10px 10px 10px 5px; 
   height: 40px;
   border:none;
@@ -97,21 +92,6 @@ label 				 {
   display: absolute;
   margin: 0 auto;
 }
-
-/* BOTTOM BARS ================================= */
-/* .bar 	{ position:relative; display:block; width:30%; }
-.bar:before, .bar:after 	{
-  content:'';
-  height:2px; 
-  width:0;
-  bottom:1px; 
-  position:absolute;
-  background:#5264AE; 
-  transition:0.2s ease all; 
-  -moz-transition:0.2s ease all; 
-  -webkit-transition:0.2s ease all;
-} */
-
 
 /* ANIMATIONS ================ */
 @-webkit-keyframes inputHighlighter {

@@ -10,7 +10,6 @@
   &__form {
     width: 100%;
     height: 200px;
-    dposition: absolute;
     margin: auto;
   }
   &__text-area {

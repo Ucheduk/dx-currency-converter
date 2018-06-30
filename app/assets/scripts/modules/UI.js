@@ -8,6 +8,7 @@ class UI {
   }
 
 
+  // Gets qurey data from IndexController
   getCurrencyVal(data) {
     
     let from = document.getElementById('fromVal').value;
@@ -17,9 +18,10 @@ class UI {
 
       let obj = data.results
       let result = Object.values(obj);
+
+      // Calculates the result of the amount to convert
       let amt = amount * result[0].val;
       amt = amt.toFixed(2);
-      console.log(result, amt, amount, amtVal);
       if(amt !== '') {
 
           // Changing the DOM to show calculated result

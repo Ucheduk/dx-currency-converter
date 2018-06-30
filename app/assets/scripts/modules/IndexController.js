@@ -7,6 +7,7 @@ class IndexController {
         this.amount = amount;
     }
 
+    // Gets the qurey data from the API
     get() {
         let qurey = `${this.from}_${this.to}`
         return new Promise((resolve, reject) => {

@@ -39,6 +39,8 @@
         transform-origin: 50% 0%;
         background-color: $mainBlue;
         padding: 25px 30px;
+        border-bottom-left-radius: 70px;
+        border-bottom-right-radius: 70px;
 
         /* @mixin atMedium{
             left: auto;
