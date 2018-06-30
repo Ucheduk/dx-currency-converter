@@ -33,7 +33,7 @@ if ('serviceWorker' in navigator) {
 // Event on convert btn click
 document.addEventListener('click', convertCurrency);
 function convertCurrency(e) {
-  if(e.target.classList.contains('convertBtn')) {
+  if(e.target.classList.contains('convertBtn') || e.target.classList.contains('fas', 'fa-arrow-alt-circle-right', 'fa-1.5x')) {
     console.log(e.target)
     
     let from = document.getElementById('fromVal').value;
