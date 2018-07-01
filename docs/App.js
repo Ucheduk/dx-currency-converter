@@ -644,11 +644,14 @@ var UI = function () {
       // Calculates the result of the amount to convert
       var amt = amount * result[0].val;
       amt = amt.toFixed(2);
-      if (amt !== '') {
+      if (document.getElementById("amount").value !== '') {
+        if (amt !== '') {
 
-        // Changing the DOM to show calculated result
-        amtVal.innerHTML = '\n          <h1>DX Currency Converter</h1>\n          <p><span class="amtInput">' + amount + ' ' + from + ' =</span><br>\n            <span class="amtval">' + amt + ' ' + to + '</span><br>\n            <span class="fromcurr">' + from + '</span> <i class="fas fa-arrows-alt-h"></i> <span class="tocurr">' + to + '</span><br>\n            <span class="rate">1 ' + from + ' = ' + result[0].val + ' ' + to + '</span>\n          </p>\n          ';
+          // Changing the DOM to show calculated result
+          amtVal.innerHTML = '\n            <h1>Currency Converter</h1>\n            <p><span class="amtInput">' + amount + ' ' + from + ' =</span><br>\n              <span class="amtval">' + amt + ' ' + to + '</span><br>\n              <span class="fromcurr">' + from + '</span> <i class="fas fa-arrows-alt-h"></i> <span class="tocurr">' + to + '</span><br>\n              <span class="rate">1 ' + from + ' = ' + result[0].val + ' ' + to + '</span>\n            </p>\n            ';
+        }
       }
+      document.getElementById("amount").value = ' ';
     }
   }]);
 
